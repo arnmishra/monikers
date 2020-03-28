@@ -3,7 +3,7 @@ extends layout
 block content
     h1= playerName
     h3 Welcome to #{title}
-    h4 Pick up to #{numCards} words to play with.
+    h4 Pick #{numCards} words to play with.
     form(name="start-game", method="post", action="/#{playerId}/dashboard")
         each word in words
             input(class='words', type='checkbox', name=word)

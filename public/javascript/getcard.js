@@ -1,5 +1,4 @@
 function getcard() {
-    console.log("hereee")
     $.ajax({
         type: 'GET',
         url: "/getCard",
