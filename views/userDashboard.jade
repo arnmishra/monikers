@@ -1,0 +1,105 @@
+extends layout
+
+block content
+    h1= playerName
+    h3 Welcome to #{title}
+
+    // 4 cases:
+    // 1: select words if its your turn
+    // 2: button to "Start Turn"
+    // 3: button to "Start Next Round"
+    // 4: show cards that team gets right
+    if myTurn
+        span(id="counter")
+        if newRound
+            button(onclick='getCard(); style.display = "none"') Start Next Round
+        else
+            button(onclick='getCard(); style.display = "none"') Start Turn
+        br
+        br
+        span.label Number of Cards Left:
+        span(id="numLeft")
+        br
+        span.label Current Word:
+        span(id="card")
+        br
+        button(onclick='passed()') Passed
+        button(onclick='skipped()') Skip
+        br
+        br
+    else
+        p Waiting on another player.
+
+    span.label Round Number:
+    span(id="roundNumber")
+    br
+    span.label Team #{team1Name} Score:
+    span(id="team1Score")
+    br
+    span.label Team #{team2Name} Score:
+    span(id="team2Score")
+
+    script(type = 'text/javascript' src = '/javascript/loadScore.js')
+    script.
+        var counter = function() {
+            var count = 60, timer = setInterval(function () {
+                if (count === 1) {
+                    clearInterval(timer);
+                    $("#counter").html("Your Turn is Over.")
+                    $.ajax({
+                        type: 'POST',
+                        url: "/changeTurns"
+                    });
+                    window.location.reload();
+                } else {
+                    $("#counter").html(count--);
+                }
+            }, 1000);
+        }
+    script.
+        var getCard = function() {
+            $.ajax({
+                type: 'GET',
+                url: "/getCard",
+                data: {card: $("#card").val()},
+                success: function (data) {
+                    var card = $('<span />').append(data.word).html();
+                    $('#card').html(card);
+                    var numLeft = $('<span />').append(data.numLeft).html();
+                    $('#numLeft').html(numLeft);
+                }
+            });
+            counter();
+        }
+    script.
+        var passed = function () {
+            $.ajax({
+                type: 'POST',
+                url: "/passed",
+                data: {card: $("#card").val()},
+                success: function (data) {
+                    if (data.word === -1) {
+                        window.location.reload();
+                        return;
+                    }
+                    var card = $('<span />').append(data.word).html();
+                    $('#card').html(card);
+                    var numLeft = $('<span />').append(data.numLeft).html();
+                    $('#numLeft').html(numLeft);
+                }
+            });
+        }
+    script.
+        var skipped = function () {
+            $.ajax({
+                type: 'POST',
+                url: "/skipped",
+                data: {card: $("#card").val()},
+                success: function (data) {
+                    var card = $('<span />').append(data.word).html();
+                    $('#card').html(card);
+                    var numLeft = $('<span />').append(data.numLeft).html();
+                    $('#numLeft').html(numLeft);
+                }
+            });
+        }

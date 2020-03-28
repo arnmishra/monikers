@@ -1,0 +1,27 @@
+{
+  "name": "monikers",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "lodash": "^4.17.15",
+    "morgan": "~1.9.1",
+    "ws": "^7.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnmishra/monikers.git"
+  },
+  "author": "Arnav Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arnmishra/monikers/issues"
+  },
+  "homepage": "https://github.com/arnmishra/monikers#readme"
+}

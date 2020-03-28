@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1= title
+    h3 Welcome to #{title}
+    form(name="start-game", method="post", action="/dashboard")
+        p #{team1Name} Team Player Names
+        - for (var i = 0; i < team1NumPlayers; ++i) {
+        div.input
+            span.label Player #{i} name
+            input(type="text", name="team1-#{i}Name")
+        - }
+        p #{team2Name} Team Player Names
+        - for (var i = 0; i < team2NumPlayers; ++i) {
+        div.input
+            span.label Player #{i} name
+            input(type="text", name="team2-#{i}Name")
+        - }
+        div.actions
+            input(type="submit", value="Start Game")

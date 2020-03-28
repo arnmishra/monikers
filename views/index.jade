@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= title
+  h3 Welcome to #{title}
+  form(name="setup-game", method="post", action="/create")
+    div.input
+      span.label Team 1 Name
+      input(type="text", name="team1Name")
+    div.input
+      span.label Team 2 Name
+      input(type="text", name="team2Name")
+    div.input
+      span.label Number of Players
+      input(type="text", name="numPlayers")
+    div.input
+      span.label Number of Cards Per Player
+      input(type="text", name="numCards")
+    div.input
+      span.label Points for correct card
+      input(type="text", name="winPoints", value="1")
+    div.input
+      span.label Negative points for skipped card
+      input(type="text", name="skipLostPoints", value="0.5")
+    div.actions
+      input(type="submit", value="Setup Game")

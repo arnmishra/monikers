@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1= title
+    h3 Welcome to #{title}
+    each player, index in players
+        a(href = "/#{index}/select") Player #{player} Page
+        br
+    br
+    span.label Round Number:
+    span(id="roundNumber")
+    br
+    span.label Team #{team1Name} Score:
+    span(id="team1Score")
+    br
+    span.label Team #{team2Name} Score:
+    span(id="team2Score")
+    script(type = 'text/javascript' src = '/javascript/loadScore.js')

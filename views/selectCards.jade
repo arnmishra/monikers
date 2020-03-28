@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    h1= playerName
+    h3 Welcome to #{title}
+    h4 Pick up to #{numCards} words to play with.
+    form(name="start-game", method="post", action="/#{playerId}/dashboard")
+        each word in words
+            input(class='words', type='checkbox', name=word)
+            span #{word}
+            br
+        h4 And/Or input your own custom words instead:
+        - for (var i = 0; i < numCards; ++i) {
+             input(class='words', type='checkbox', name='userWord#{i}',
+                 onclick="if (this.checked){ document.getElementById" +
+                 "('userWord#{i}').removeAttribute('disabled');}")
+             input(id='userWord#{i}', name='userWord#{i}', type='text',
+                 disabled)
+             br
+         - }
+        br
+        div.actions
+            input(type="submit", value="Select Cards")
+    script.
+        var limit = #{numCards};
+    script(type = 'text/javascript' src = '/javascript/limitCheckboxes.js')
