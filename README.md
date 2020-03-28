@@ -1,6 +1,8 @@
 # Monikers
 Monikers game: http://www.monikersgame.com/
 
+Still in initial V1 MVP status
+
 This is an implementation of the game made in Javascript. I used this mostly
 as a way to learn some basic Javascript so the code may not look great. It's
 meant to be played remotely via a video call. Please refer to the Monikers
